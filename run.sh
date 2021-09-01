@@ -2,4 +2,4 @@
 
 
 
-  java -jar data/lib/ProducerService-0.0.1-SNAPSHOT.jar
+  java -jar data/lib/KafkaService-0.0.1-SNAPSHOT.jar
