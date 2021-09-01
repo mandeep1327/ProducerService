@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: 'producer'
+producer:
+  loader:
+    pingFileSchedule: 0 0 1 * * ? # Every day at 1 am
+    testing: 0/30 * * * * *   #every ten seconds.
+
+kafka:
+  topic_product: 'bank-products'
+  topic_customer: 'bank-customers'

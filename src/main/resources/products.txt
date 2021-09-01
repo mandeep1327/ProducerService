@@ -1,0 +1,33 @@
+ {  "products":
+     [
+     {
+      "productId": 1,
+      "productName": "saving",
+      "departmentName": "accounts",
+      "attrNumber" :2
+
+      },
+{
+      "productId": 2,
+      "productName": "current",
+      "departmentName": "accounts",
+      "attrNumber" :2
+
+      },
+      {
+            "productId": 3,
+            "productName": "master",
+            "departmentName": "debit-cards",
+            "attrNumber" :2
+
+            },
+
+ {
+            "productId": 4,
+            "productName": "visa",
+            "departmentName": "debit-cards",
+            "attrNumber" :2
+
+            }
+   ]
+   }
