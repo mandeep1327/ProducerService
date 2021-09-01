@@ -17,13 +17,13 @@
     <properties>
         <java.version>11</java.version>
     </properties>
-    <repositories>
+   <!-- <repositories>
 
         <repository>
             <id>confluent</id>
             <url>http://packages.confluent.io/maven/</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <dependencies>
         <dependency>
@@ -31,11 +31,11 @@
             <artifactId>avro</artifactId>
             <version>1.10.2</version>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-avro-serializer</artifactId>
             <version>2.0.0</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
@@ -120,7 +120,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <excludes>
+                   <excludes>
+
                         <exclude>**/log4j.properties</exclude>
                     </excludes>
                     <archive>

@@ -9,7 +9,7 @@ This project is based on kafka stream. There is one micro service which will get
  
 
 Get Api: 
-http://localhost:8085/V1/getAllCustomers/
+http://localhost:8085/v1/getAllCustomers/
 
 
 ### Structure
@@ -21,13 +21,17 @@ read the message from the txt files in every 1 day.
 
 Consumer will read the message from the queue when we call the api endpoint.
 
-#Run
+#Run 
+
 step 1:
+
 docker-compose up
 
-step 2:
+step 2: 
+
 Run Spring boot application.
 
-step 3:
+step 3: 
+
 call endpoint to see the result in browser/postman
 
