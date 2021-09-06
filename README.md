@@ -4,13 +4,14 @@ This project is based on kafka stream. There is one micro service which will get
 
 | Service endpoint                               | Verb    |                               
 | -----------------------------------------------| ------- |
-/v1/getAllCustomers                               |  GET    |    
+/customers                                       |  GET    |  
+/customers/stream                                |  GET    |  
 
  
 
 Get Api: 
-http://localhost:8085/v1/getAllCustomers/
-
+http://localhost:8085/customers    (with rest endpoint)
+http://localhost:8085/customers/stream (with functional endpoint)
 
 ### Structure
 
