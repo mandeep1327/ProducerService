@@ -30,15 +30,11 @@ public class KafkaConsumerConfig {
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 JsonDeserializer.class.getName());
         configuration.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        //Schema registry location.
-     //   configuration.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG,
-     //           "http://localhost:8081"); //<----- Run Schema Registry on 8081
-
         return configuration;
     }
 
     @Bean
-    ReceiverOptions<String,  ?> kafkaReceiverOptions(@Value("${kafka.topic.in}") String[] inTopicName) {
+    ReceiverOptions<String,  String> kafkaReceiverOptions(@Value("${kafka.topic.in}") String[] inTopicName) {
         ReceiverOptions<String, String> options = ReceiverOptions.create(kafkaConsumerConfiguration());
         return options.subscription(Arrays.asList(inTopicName))
           .withKeyDeserializer(new StringDeserializer())

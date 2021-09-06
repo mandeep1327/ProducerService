@@ -1,6 +1,6 @@
-package com.apache.kafka.producer.inbound;
+package com.apache.kafka.producer.schedular;
 
-import com.apache.kafka.producer.service.ports.LoadDataService;
+import com.apache.kafka.producer.service.ports.ReadFile;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +13,12 @@ import java.io.IOException;
 
 @Configuration
 @EnableScheduling
-public class SchedularController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SchedularController.class);
+public class FileSchedular {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileSchedular.class);
 
-	private LoadDataService service;
+	private ReadFile service;
 
-	public SchedularController(LoadDataService service)
+	public FileSchedular(ReadFile service)
 	{
 		this.service = service;
 	}

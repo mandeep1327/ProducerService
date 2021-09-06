@@ -1,4 +1,4 @@
-package com.apache.kafka.consumer.inbound.mq;
+package com.apache.kafka.consumer.mq;
 
 import com.apache.kafka.producer.service.model.Customer;
 import com.apache.kafka.producer.service.model.Product;
@@ -11,19 +11,15 @@ import org.springframework.kafka.core.reactive.ReactiveKafkaConsumerTemplate;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
-import java.time.Duration;
-
 @Component
-public class KafkaConsumer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
+public class MessageConsumer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageConsumer.class);
 
     @Autowired
     private  ReactiveKafkaConsumerTemplate<String,  ?> reactiveKafkaConsumerTemplate;
 
-  //  @KafkaListener(topics ="${kafka.topic_customer}",groupId = "customer")
     public Flux getCustomers() {
       return  reactiveKafkaConsumerTemplate.receiveAutoAck()
-                .delayElements(Duration.ofSeconds(2L))
                 .doOnNext(consumerRecord -> LOGGER.info("received key={}, value={} from topic={}, offset={}",
                         consumerRecord.key(),
                         consumerRecord.value(),
@@ -31,14 +27,13 @@ public class KafkaConsumer {
                         consumerRecord.offset())
                 )
                 .map(ConsumerRecord::value)
-                .doOnNext(cusstomer -> LOGGER.info("successfully consumed {}={}", Customer.class.getSimpleName(), cusstomer))
+                .doOnNext(customer -> LOGGER.info("successfully consumed {}={}", Customer.class.getSimpleName(), customer))
               .doOnError(throwable -> LOGGER.error("something bad happened while consuming : {}", throwable.getMessage()));
     }
 
     @KafkaListener(topics ="${kafka.topic_product}",groupId = "product")
     public Flux getProducts() {
        return reactiveKafkaConsumerTemplate.receiveAutoAck()
-                .delayElements(Duration.ofSeconds(2L))
                 .doOnNext(consumerRecord -> LOGGER.info("received key={}, value={} from topic={}, offset={}",
                         consumerRecord.key(),
                         consumerRecord.value(),

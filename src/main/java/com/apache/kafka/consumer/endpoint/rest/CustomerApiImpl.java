@@ -1,6 +1,6 @@
-package com.apache.kafka.consumer.inbound.endpoint;
+package com.apache.kafka.consumer.endpoint.rest;
 
-import com.apache.kafka.consumer.inbound.endpoint.dto.CustomerResponseDTO;
+import com.apache.kafka.consumer.endpoint.dto.CustomerResponseDTO;
 import com.apache.kafka.consumer.service.CustomerHandler;
 import com.apache.kafka.producer.service.model.Customer;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class CustomerApiImpl implements CustomerApi {
 	}
 
 	public ResponseEntity<Flux<CustomerResponseDTO>> getCustomers() {
-		List<Customer> customers=service.withoutStream();
+		List<Customer> customers=service.getCustomers();
 		Mono<List<CustomerResponseDTO>> monoList= mapper.employeeModelToDto(customers);
 		Flux<CustomerResponseDTO> response=	monoList
 				.flatMapIterable(list -> list);

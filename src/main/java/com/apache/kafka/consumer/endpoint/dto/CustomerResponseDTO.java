@@ -1,10 +1,7 @@
-package com.apache.kafka.consumer.inbound.endpoint.dto;
+package com.apache.kafka.consumer.endpoint.dto;
 
-import com.apache.kafka.producer.service.model.Customer;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
