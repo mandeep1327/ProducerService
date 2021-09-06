@@ -9,3 +9,5 @@ producer:
 kafka:
   topic_product: 'bank-products'
   topic_customer: 'bank-customers'
+  bootstrapAddress: 'localhost:9092'
+  group.id: 'customer'

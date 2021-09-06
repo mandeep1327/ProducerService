@@ -38,7 +38,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    ReceiverOptions<String,  String> kafkaReceiverOptions(@Value("${kafka.topic.in}") String[] inTopicName) {
+    ReceiverOptions<String,  ?> kafkaReceiverOptions(@Value("${kafka.topic.in}") String[] inTopicName) {
         ReceiverOptions<String, String> options = ReceiverOptions.create(kafkaConsumerConfiguration());
         return options.subscription(Arrays.asList(inTopicName))
           .withKeyDeserializer(new StringDeserializer())
@@ -47,7 +47,7 @@ public class KafkaConsumerConfig {
 
 
     @Bean
-    public ReactiveKafkaConsumerTemplate<String, String> reactiveKafkaConsumerTemplate(ReceiverOptions<String, String> kafkaReceiverOptions) {
+    public ReactiveKafkaConsumerTemplate<String, ?> reactiveKafkaConsumerTemplate(ReceiverOptions<String, ?> kafkaReceiverOptions) {
         return new ReactiveKafkaConsumerTemplate<>(kafkaReceiverOptions);
     }
 }

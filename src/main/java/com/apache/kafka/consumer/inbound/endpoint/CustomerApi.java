@@ -21,8 +21,8 @@ public interface CustomerApi {
             @ApiResponse(code = 200, message = "Customer found.", response = CustomerResponseDTO.class),
             @ApiResponse(code = 404, message = "Customer Not found.", response = ErrorMessageDTO.class)})
 
-    @RequestMapping(value = "/v1/getAllCustomers",
-            produces = MediaType.TEXT_EVENT_STREAM_VALUE,
+    @RequestMapping(value = "/customers",
+            produces = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET)
     public ResponseEntity<Flux<CustomerResponseDTO>> getCustomers() ;
 

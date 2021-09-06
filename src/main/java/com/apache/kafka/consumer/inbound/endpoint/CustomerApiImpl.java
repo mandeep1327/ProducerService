@@ -24,7 +24,7 @@ public class CustomerApiImpl implements CustomerApi {
 	}
 
 	public ResponseEntity<Flux<CustomerResponseDTO>> getCustomers() {
-		List<Customer> customers=service.getAllCustomers();
+		List<Customer> customers=service.withoutStream();
 		Mono<List<CustomerResponseDTO>> monoList= mapper.employeeModelToDto(customers);
 		Flux<CustomerResponseDTO> response=	monoList
 				.flatMapIterable(list -> list);

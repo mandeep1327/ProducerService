@@ -18,11 +18,11 @@ public class KafkaConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
     @Autowired
-    private  ReactiveKafkaConsumerTemplate<String,  String> reactiveKafkaConsumerTemplate;
+    private  ReactiveKafkaConsumerTemplate<String,  ?> reactiveKafkaConsumerTemplate;
 
-    @KafkaListener(topics ="${kafka.topic_customer}")
-    public Flux<String> getCustomers() {
-        Flux<String> customers= reactiveKafkaConsumerTemplate.receiveAutoAck()
+  //  @KafkaListener(topics ="${kafka.topic_customer}",groupId = "customer")
+    public Flux getCustomers() {
+      return  reactiveKafkaConsumerTemplate.receiveAutoAck()
                 .delayElements(Duration.ofSeconds(2L))
                 .doOnNext(consumerRecord -> LOGGER.info("received key={}, value={} from topic={}, offset={}",
                         consumerRecord.key(),
@@ -33,13 +33,11 @@ public class KafkaConsumer {
                 .map(ConsumerRecord::value)
                 .doOnNext(cusstomer -> LOGGER.info("successfully consumed {}={}", Customer.class.getSimpleName(), cusstomer))
               .doOnError(throwable -> LOGGER.error("something bad happened while consuming : {}", throwable.getMessage()));
-        LOGGER.info("customers::",customers);
-        return customers;
     }
 
-    @KafkaListener(topics ="${kafka.topic_product}")
-    public Flux<String> getProducts() {
-        Flux<String> products= reactiveKafkaConsumerTemplate.receiveAutoAck()
+    @KafkaListener(topics ="${kafka.topic_product}",groupId = "product")
+    public Flux getProducts() {
+       return reactiveKafkaConsumerTemplate.receiveAutoAck()
                 .delayElements(Duration.ofSeconds(2L))
                 .doOnNext(consumerRecord -> LOGGER.info("received key={}, value={} from topic={}, offset={}",
                         consumerRecord.key(),
@@ -50,7 +48,5 @@ public class KafkaConsumer {
                 .map(ConsumerRecord::value)
                 .doOnNext(product -> LOGGER.info("successfully consumed {}={}", Product.class.getSimpleName(), product))
                 .doOnError(throwable -> LOGGER.error("something bad happened while consuming : {}", throwable.getMessage()));
-        LOGGER.info("products::",products);
-        return products;
     }
 }
