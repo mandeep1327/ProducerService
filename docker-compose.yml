@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:alpine3.14
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8086:8086
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper:latest
+
+    ports:
+      - "2181:2181"
+  kafka:
+    container_name: kafka-single-broker
+    image: wurstmeister/kafka:latest
+
+    ports:
+      - "9092:9092"
+    environment:
+        KAFKA_ADVERTISED_HOST_NAME: localhost
+        KAFKA_CREATE_TOPICS: "bank-customers:1:1,bank-products:1:1"
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ./data/kafka-1/:/kafka/kafka-logs/
