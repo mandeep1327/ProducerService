@@ -18,7 +18,7 @@ public class MessageProducer implements Publisher {
     private static final Logger log = LoggerFactory.getLogger(MessageProducer.class);
 
     @Autowired
-    private ReactiveKafkaProducerTemplate<String, String> reactiveKafkaProducerTemplate;
+    private ReactiveKafkaProducerTemplate<String, String> template;
 
     @Value("${kafka.topic_customer}")
     String kafkaTopic_customer;
@@ -30,7 +30,7 @@ public class MessageProducer implements Publisher {
     public void publishToBankCustomer(String customer) {
 
         log.info("send to topic={}, {}={},", kafkaTopic_customer, Customer.class.getSimpleName(), customer);
-        reactiveKafkaProducerTemplate.send(kafkaTopic_customer, "record", customer)
+        template.send(kafkaTopic_customer, "record", customer)
                 .doOnSuccess(senderResult -> log.info("sent {} offset : {}", customer, senderResult.recordMetadata().offset()))
                 .subscribe();
     }
@@ -38,7 +38,7 @@ public class MessageProducer implements Publisher {
     @Override
     public void publishTobankProduct(String product) {
         log.info("send to topic={}, {}={},", kafkaTopic_product, Product.class.getSimpleName(), product);
-        reactiveKafkaProducerTemplate.send(kafkaTopic_product, "record", product)
+        template.send(kafkaTopic_product, "record", product)
                 .doOnSuccess(senderResult -> log.info("sent {} offset : {}", product, senderResult.recordMetadata().offset()))
                 .subscribe();
     }

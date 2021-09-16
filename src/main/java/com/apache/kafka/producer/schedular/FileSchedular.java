@@ -23,7 +23,7 @@ public class FileSchedular {
 		this.service = service;
 	}
 
-	@Scheduled(cron = "${producer.loader.testing}")
+	@Scheduled(cron = "${producer.loader.ping}")
 	public void loadCustomer()  {
 		try {
 			service.readCustomerFile();
@@ -35,7 +35,7 @@ public class FileSchedular {
 			LOGGER.error("File Format Not Correct");
 		}
 	}
-	@Scheduled(cron = "${producer.loader.testing}")
+	@Scheduled(cron = "${producer.loader.ping}")
 	public void loadProduct() {
 		try {
 		service.readProductFile();
