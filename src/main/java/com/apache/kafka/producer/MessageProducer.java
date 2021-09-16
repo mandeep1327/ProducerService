@@ -1,4 +1,4 @@
-package com.apache.kafka.producer.outbound;
+package com.apache.kafka.producer;
 
 import com.apache.kafka.producer.service.model.Customer;
 import com.apache.kafka.producer.service.model.Product;
@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
 import org.springframework.stereotype.Component;
 
+/*
+This class will publish the message to topic (bank-customers and bank-products)
+* */
 @Component
 public class MessageProducer implements Publisher {
     private static final Logger log = LoggerFactory.getLogger(MessageProducer.class);

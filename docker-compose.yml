@@ -1,15 +1,4 @@
 services:
-  db:
-    image: postgres:alpine3.14
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: example
-
-  adminer:
-    image: adminer:latest
-    restart: always
-    ports:
-      - 8086:8086
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper:latest
